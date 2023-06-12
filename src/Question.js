@@ -19,17 +19,17 @@ function Question(props) {
 
     const answerElements = answers.map((answer, index) => {
         return (
-            <div key={index}>
-                <input type="radio" id={`answer${index}`} name={`question${props.num}`} />
-                <label htmlFor={`answer${index}`}>{answer}</label>
+            <div className="answer" key={index}>
+            <input type="radio" id={`question${props.num}_answer${index}`} name={`question${props.num}`} />
+            <label htmlFor={`question${props.num}_answer${index}`} className="answer--label">{answer}</label>
             </div>
         )
     })
 
     return(
         <div>
-            {props.query}
-            {answerElements}
+            <h4 className="query">{props.query}</h4>
+            <div className="answers">{answerElements}</div>
         </div>
     )
 }

@@ -17,13 +17,12 @@ function Quizz() {
         const correctAnswer = decodeHTML(data.correct_answer)
 
         return(
-            <Question key={index} query={query} incorrectAnswers={incorrectAnswers} correctAnswer={correctAnswer} />
+            <Question key={index} query={query} incorrectAnswers={incorrectAnswers} correctAnswer={correctAnswer} num={index} />
         )
     })
 
     return(
         <div className="quizz">
-            <p>Quizz here</p>
             {quizzElements}
         </div>
     )
