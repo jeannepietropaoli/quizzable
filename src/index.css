@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Karla', sans-serif;
+  box-sizing: border-box;
+}
+
+.app {
+  position: relative;
+}
+
+.background-bottom-corner,
+.background-top-corner {
+  width: 25%;
+  height: auto;
+  z-index: -1;
+}
+
+.background-top-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.background-bottom-corner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  gap: 10px;
+}
+
+.home--title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #293264;
+  margin: 0;
+}
+
+.home--description {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #293264;
+  margin: 0;
+}
+
+.home--start-button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #F5F7FB;
+  background-color: #4D5B9E;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 15px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
