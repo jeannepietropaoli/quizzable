@@ -13,6 +13,9 @@ body {
 
 .app {
   position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
 }
 
 .background-bottom-corner,
@@ -39,8 +42,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   gap: 10px;
 }
 
@@ -72,3 +75,45 @@ body {
   cursor: pointer;
 }
 
+.quizz {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.quizz > * {
+  width: fit-content;
+  padding-left: 75px;
+}
+
+.query {
+  margin: 0 0 7px 0;
+}
+
+ .answers {
+  display: flex;
+  gap: 15px;
+}
+
+.answer {
+  width: max-content;
+  height: 20px;
+}
+
+.answer input[type="radio"] {
+  display: none;
+}
+
+.answer input[type="radio"]:checked + .answer--label {
+  background: #D6DBF5;
+  border: none;
+}
+
+.answer--label {
+  color: #293264;
+  display: inline-block;
+  padding: 5px 20px;
+  border: 1px solid #293264;
+  border-radius: 10px;
+  cursor: pointer;
+}
