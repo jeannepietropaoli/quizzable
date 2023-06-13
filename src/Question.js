@@ -1,6 +1,17 @@
 import React from "react";
+import { decodeHTML } from "entities"
 
 function Question(props) {
+    const query = decodeHTML(props.data.question)
+    const incorrectAnswers = props.data.incorrect_answers.map(answer => decodeHTML(answer))
+    const correctAnswer = decodeHTML(props.data.correct_answer)
+    const [answers, setAnswers] = React.useState([...incorrectAnswers, correctAnswer])
+    const [userAnswer, setUserAnswer] = React.useState("")
+
+    React.useEffect(() => {
+        setAnswers(prevAnswers => shuffleArray(prevAnswers))
+    }, [])
+
     function shuffleArray(array) {
         const arrayCopy = array
         const newArray = []
@@ -10,25 +21,62 @@ function Question(props) {
         }
         return newArray
     }
+    console.log(query + userAnswer)
 
-    const [answers, setAnswers] = React.useState([...props.incorrectAnswers, props.correctAnswer])
+    function selectAnswer(e) {
+        setUserAnswer(e.target.value)
+    }
 
-    React.useEffect(() => {
+    // const [answers, setAnswers] = React.useState([...props.incorrectAnswers, props.correctAnswer])
+
+    /* React.useEffect(() => {
         setAnswers(shuffleArray(answers))
-    }, [])
+    }, []) */
+
+    /* function selectAnswer(event) {
+        console.log(event.target)
+   
+        setQuizzData(prevFormData => {
+            return prevFormData.map((question, index) => {
+                if(`question${index}` === event.target.name ) {
+                    question.
+                }
+                else {
+                    return {...question}
+                }
+                return `question${index}` === event.target.name 
+                    ? {...question, [question.selected] : event.target.value}
+                    : {...question}
+            })
+        })
+    } */
 
     const answerElements = answers.map((answer, index) => {
         return (
             <div className="answer" key={index}>
-            <input type="radio" id={`question${props.num}_answer${index}`} name={`question${props.num}`} />
-            <label htmlFor={`question${props.num}_answer${index}`} className="answer--label">{answer}</label>
+            <input
+                type="radio" 
+                value={answer}
+                name={`question${props.number}`} 
+                id={`question${props.number}_answer${index}`}
+                onChange={selectAnswer}
+                checked={userAnswer === answer}
+                // checked = {answer === props.selectedAnswer}
+                // checked={answer === props.selectedAnswer}
+            />
+            <label 
+                htmlFor={`question${props.number}_answer${index}`} 
+                className="answer--label"
+            >
+                {answer}
+            </label>
             </div>
         )
     })
 
     return(
-        <div>
-            <h4 className="query">{props.query}</h4>
+        <div className="question">
+            <h4 className="query">{query}</h4>
             <div className="answers">{answerElements}</div>
         </div>
     )

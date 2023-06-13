@@ -1,30 +1,42 @@
 import React from "react"
-import { decodeHTML } from "entities"
 import Question from "./Question"
 
 function Quizz() {
     const [quizzData, setQuizzData] = React.useState([])
 
+    function handleSubmit() {
+        
+    }
+
     React.useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5")
             .then(res => res.json())
-                .then(data => setQuizzData(data.results))
+                .then(data => {
+                    setQuizzData(() => {
+                        return data.results.map((result, index) => {
+                            return {...result, questionNumber : `question${index}`}
+                        })
+                    })
+                })
     }, [])
 
-    const quizzElements = quizzData.map((data, index) => {
-        const query = decodeHTML(data.question)
-        const incorrectAnswers = data.incorrect_answers.map(answer => decodeHTML(answer))
-        const correctAnswer = decodeHTML(data.correct_answer)
+    console.log(quizzData)
 
+    const quizzElements = quizzData.map((data, index) => {
         return(
-            <Question key={index} query={query} incorrectAnswers={incorrectAnswers} correctAnswer={correctAnswer} num={index} />
+            <Question 
+                data={data}
+                key={index} 
+                number={index}
+            />
         )
     })
 
     return(
-        <div className="quizz">
+        <form className="quizz" onSubmit={handleSubmit}>
             {quizzElements}
-        </div>
+            <button className="quizz--submit-button">Check answers</button>
+        </form>
     )
 }
 
