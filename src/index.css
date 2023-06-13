@@ -79,11 +79,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding-left: 75px;
 }
 
 .quizz > * {
   width: fit-content;
-  padding-left: 75px;
 }
 
 .query {
@@ -116,4 +116,18 @@ body {
   border: 1px solid #293264;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.quizz--submit-button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #F5F7FB;
+  background-color: #4D5B9E;
+  width: max-content;
+  height: 35px;
+  border: none;
+  border-radius: 15px;
+  /* align-self: center; */
+  padding: 11px 22px;
 }
