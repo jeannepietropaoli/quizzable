@@ -1,18 +1,17 @@
 import React from "react"
 import Question from "./Question"
 import { decodeHTML } from "entities"
+import Confetti from 'react-confetti'
 
 function Quizz() {
     const [quizzData, setQuizzData] = React.useState([])
     const [submit, setSubmit] = React.useState(false)
     const [resetQuizz, setResetQuizz] = React.useState(false)
     const [score, setScore] = React.useState(0)
-    console.log('reruns quizz')
-    console.log(`score ::: ${score}`)
+    console.log(quizzData)
 
     function countFinalScore() {
         quizzData.forEach(data => {
-            console.log('counting')
             if(data.correctAnswer === data.userAnswer)
                 setScore(prevScore => prevScore + 1)
         })
@@ -20,7 +19,6 @@ function Quizz() {
 
     function handleSubmit(e) {
         countFinalScore()
-        console.log(`final score is : ${score}`)
         setSubmit(true)
     }
 
@@ -82,21 +80,30 @@ function Quizz() {
         )
     })
 
+    function getScoreMeesage() {
+        if(score === 5)
+            return "Congrats, all your answers are right ! Good job !"
+        else if (score === 0)
+            return "No good answer, better luck next time !"
+        else 
+           return `You scored ${score} points`
+    }
+
     return(
         <form className="quizz">
             {quizzElements}
             {submit && 
                 <div className="quizz--result-container">
-                    <button type="button" onClick={handleResetQuizz} className="quizz--submit-button">Reset Quizz</button>
-                    <span className="quizz--score">{`You scored ${score} points`}</span>
+                    <button type="button" onClick={handleResetQuizz} className="quizz--submit-button">Play again</button>
+                    <span className="quizz--score">{getScoreMeesage()}</span>
                 </div>
             }
+            {submit && score === quizzData.length && <Confetti />}
             {!submit && <button type="button" onClick={handleSubmit} className="quizz--reset-button">Check answers</button>}
         </form>
     )
 }
 
 // form validation to ensure every question has one checked answer ?
-// confetti when every answer s right
 
 export default Quizz
