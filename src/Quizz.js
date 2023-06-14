@@ -4,10 +4,17 @@ import { decodeHTML } from "entities"
 
 function Quizz() {
     const [quizzData, setQuizzData] = React.useState([])
+    const [submit, setSubmit] = React.useState(false)
+    const [resetQuizz, setResetQuizz] = React.useState(false)
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(quizzElements)
+        setSubmit(true)
+    }
+
+    function handleResetQuizz() {
+        setSubmit(false)
+        setResetQuizz(prevResetQuiz => !prevResetQuiz)
     }
 
     function shuffleArray(array) {
@@ -31,12 +38,13 @@ function Quizz() {
                                 correctAnswer : decodeHTML(result.correct_answer),
                                 answers : shuffleArray([...(result.incorrect_answers).map(answer => decodeHTML(answer)), result.correct_answer, ]),
                                 userAnswer : "",
-                                questionIndex : index
+                                questionIndex : index,
+                                correction : "correction-none"
                             }
                         })
                     })
                 })
-    }, [])
+    }, [resetQuizz])
 
     function selectAnswer(e) {
         const targetQuestionIndex = JSON.parse(e.target.getAttribute("data-question-index"))
@@ -56,16 +64,23 @@ function Quizz() {
                 data={data}
                 key={index} 
                 selectAnswer={selectAnswer}
+                submit={submit}
             />
         )
     })
 
     return(
-        <form className="quizz" onSubmit={handleSubmit}>
+        <form className="quizz">
             {quizzElements}
-            <button className="quizz--submit-button">Check answers</button>
+            {submit 
+                ? <button type="button" onClick={handleResetQuizz} className="quizz--submit-button">Reset Quizz</button>
+                : <button type="button" onClick={handleSubmit} className="quizz--reset-button">Check answers</button>
+            }
         </form>
     )
 }
+
+// form validation to ensure every question has one checked answer ?
+// confetti when every answer s right
 
 export default Quizz

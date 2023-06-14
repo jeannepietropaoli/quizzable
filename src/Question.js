@@ -2,6 +2,16 @@ import React from "react";
 
 function Question(props) {
     const answerElements = props.data.answers.map((answer, index) => {
+        function correctAnswer() {
+            if(props.submit) {
+                const isAnswerChecked = answer === props.data.userAnswer
+                if (props.data.correctAnswer === answer) return "good-answer"
+                else if(isAnswerChecked && props.data.correctAnswer !== answer) return("wrong-answer")
+                else return("neutral")
+            }
+            else return "neutral"
+        }
+
         return (
             <div className="answer" key={index}>
             <input
@@ -15,7 +25,7 @@ function Question(props) {
             />
             <label 
                 htmlFor={`question${props.data.questionIndex}_answer${index}`} 
-                className="answer--label"
+                className={`answer--label ${props.submit ? "correction-visible" : "correction-hidden"} ${correctAnswer()}`}
             >
                 {answer}
             </label>
