@@ -147,3 +147,13 @@ body {
 .correction-visible {
   border: 1px solid #4D5B9E;
 }
+
+.quizz--result-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quizz--score {
+  font-size: 0.9rem;
+}

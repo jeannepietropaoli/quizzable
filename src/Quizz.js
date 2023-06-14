@@ -6,14 +6,27 @@ function Quizz() {
     const [quizzData, setQuizzData] = React.useState([])
     const [submit, setSubmit] = React.useState(false)
     const [resetQuizz, setResetQuizz] = React.useState(false)
+    const [score, setScore] = React.useState(0)
+    console.log('reruns quizz')
+    console.log(`score ::: ${score}`)
+
+    function countFinalScore() {
+        quizzData.forEach(data => {
+            console.log('counting')
+            if(data.correctAnswer === data.userAnswer)
+                setScore(prevScore => prevScore + 1)
+        })
+    }
 
     function handleSubmit(e) {
-        e.preventDefault()
+        countFinalScore()
+        console.log(`final score is : ${score}`)
         setSubmit(true)
     }
 
     function handleResetQuizz() {
         setSubmit(false)
+        setScore(0)
         setResetQuizz(prevResetQuiz => !prevResetQuiz)
     }
 
@@ -72,10 +85,13 @@ function Quizz() {
     return(
         <form className="quizz">
             {quizzElements}
-            {submit 
-                ? <button type="button" onClick={handleResetQuizz} className="quizz--submit-button">Reset Quizz</button>
-                : <button type="button" onClick={handleSubmit} className="quizz--reset-button">Check answers</button>
+            {submit && 
+                <div className="quizz--result-container">
+                    <button type="button" onClick={handleResetQuizz} className="quizz--submit-button">Reset Quizz</button>
+                    <span className="quizz--score">{`You scored ${score} points`}</span>
+                </div>
             }
+            {!submit && <button type="button" onClick={handleSubmit} className="quizz--reset-button">Check answers</button>}
         </form>
     )
 }
