@@ -37,6 +37,14 @@ body {
   left: 0;
 }
 
+.favicon--attribution {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+}
+
 .home {
   display: flex;
   flex-direction: column;
@@ -45,6 +53,7 @@ body {
   height: 100%;
   width: 100%;
   gap: 10px;
+  position: relative;
 }
 
 .home--title {

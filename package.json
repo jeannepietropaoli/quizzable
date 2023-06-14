@@ -3,6 +3,7 @@
   "repository": {
     "url": "git+https://github.com/jeannepietropaoli/quizzable.git"
   },
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
