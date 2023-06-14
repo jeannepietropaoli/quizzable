@@ -4,13 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Live version
 
-Not available yet
+https://jeannepietropaoli.github.io/quizzable
 
 ## Description
 
 Final project to practice skills learned inside the React Course by Bob Ziroll on Scrimba : https://scrimba.com/learn/learnreact
 
-Thee goal of this project is to create a React quizz app using the open trivia database (https://opentdb.com/)
+The goal of this project is to create a React quizz app using the open trivia database (https://opentdb.com/)
 
 ## Skills to practice
 
