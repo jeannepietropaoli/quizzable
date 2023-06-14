@@ -118,7 +118,8 @@ body {
   cursor: pointer;
 }
 
-.quizz--submit-button {
+.quizz--submit-button,
+.quizz--reset-button {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 11px;
@@ -128,6 +129,21 @@ body {
   height: 35px;
   border: none;
   border-radius: 15px;
-  /* align-self: center; */
   padding: 11px 22px;
+  cursor: pointer;
+}
+
+.good-answer  {
+  background-color: #94D7A2 !important;
+  border: none !important;
+}
+
+.wrong-answer {
+  background-color: #F8BCBC !important;
+  border: none !important;
+}
+
+
+.correction-visible {
+  border: 1px solid #4D5B9E;
 }
