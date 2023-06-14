@@ -23,7 +23,8 @@ Thee goal of this project is to create a React quizz app using the open trivia d
 
 ## Features
 
-- Random set of five questions that change at every page reload
+- Random set of five questions that change at every page reload and game reset
 - Home page before starting the quizz
 - Neat form design
 - Form correction with clear visual clues
+- Score display with custom messages and a special confetti animation for a perfect score
