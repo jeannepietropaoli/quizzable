@@ -2,13 +2,13 @@ import React from "react"
 import Question from "./Question"
 import { decodeHTML } from "entities"
 import Confetti from 'react-confetti'
+import { nanoid } from "nanoid"
 
 function Quizz() {
     const [quizzData, setQuizzData] = React.useState([])
     const [submit, setSubmit] = React.useState(false)
     const [resetQuizz, setResetQuizz] = React.useState(false)
     const [score, setScore] = React.useState(0)
-    console.log(quizzData)
 
     function countFinalScore() {
         quizzData.forEach(data => {
@@ -49,20 +49,19 @@ function Quizz() {
                                 correctAnswer : decodeHTML(result.correct_answer),
                                 answers : shuffleArray([...(result.incorrect_answers).map(answer => decodeHTML(answer)), result.correct_answer, ]),
                                 userAnswer : "",
+                                id : nanoid(),
                                 questionIndex : index,
-                                correction : "correction-none"
                             }
                         })
                     })
                 })
     }, [resetQuizz])
 
-    function selectAnswer(e) {
-        const targetQuestionIndex = JSON.parse(e.target.getAttribute("data-question-index"))
+    function selectAnswer(e, id) {
         const targetAnswerValue = e.target.value
         setQuizzData(prevQuizzData => {
             return prevQuizzData.map(prevData => {
-                return prevData.questionIndex === targetQuestionIndex
+                return prevData.id === id
                     ? {...prevData, userAnswer : targetAnswerValue}
                     : {...prevData}
             })
@@ -74,7 +73,7 @@ function Quizz() {
             <Question 
                 data={data}
                 key={index} 
-                selectAnswer={selectAnswer}
+                selectAnswer={(e) => selectAnswer(e, data.id)}
                 submit={submit}
             />
         )
