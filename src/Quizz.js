@@ -1,8 +1,10 @@
 import React from "react"
 import Question from "./Question"
 import { decodeHTML } from "entities"
-import Confetti from 'react-confetti'
+import Confetti from "react-confetti"
 import { nanoid } from "nanoid"
+import decode from "html-entities-decoder"
+
 
 function Quizz() {
     const [quizzData, setQuizzData] = React.useState([])
@@ -45,9 +47,9 @@ function Quizz() {
                     setQuizzData(() => {
                         return data.results.map((result, index) => {
                             return {
-                                query : decodeHTML(result.question),
-                                correctAnswer : decodeHTML(result.correct_answer),
-                                answers : shuffleArray([...(result.incorrect_answers).map(answer => decodeHTML(answer)), result.correct_answer, ]),
+                                query : decode(result.question),
+                                correctAnswer : decode(result.correct_answer),
+                                answers : shuffleArray([...(result.incorrect_answers).map(answer => decode(answer)), result.correct_answer, ]),
                                 userAnswer : "",
                                 id : nanoid(),
                                 questionIndex : index,
